@@ -46,6 +46,7 @@ MYSTR;
 /** @var array $wordArray - Array of every word in the input string */
 //make sure that new lines are treated as spaces using strtr()
 $wordArray = explode(' ', strtr($inputString, "\n", ' '));
+//todo - add illegal characters
 
 /**
  * @param array $arr - Input array of exploded string.
@@ -53,6 +54,7 @@ $wordArray = explode(' ', strtr($inputString, "\n", ' '));
  */
 function varCount($arr)
 {
+    //todo: use is_numeric(), not this messy grossness
     $numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     $countArray = ['num_numeric' => 0, 'num_string' => 0, 'num_bool' => 0];
     foreach ($arr as $item) {
