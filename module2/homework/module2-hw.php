@@ -16,9 +16,12 @@ function getDeck()
 {
     $result = [];
     $entity = ["&diams;", "&hearts;", "&spades;", "&clubs;"];
-    for ($j = 0; $j < 4; $j++) {
-        for ($i = 1; $i < 14; $i++) {
 
+    //loop 4 times for each suit
+    for ($j = 0; $j < 4; $j++) {
+        //loop 13 times per suit for Ace through King
+        for ($i = 1; $i < 14; $i++) {
+            //Switch for special cases (A J Q K)
             switch ($i) {
                 case 1:
                     $result[] = "A$entity[$j]";
@@ -89,6 +92,7 @@ function deal($players, $numCards, &$shuffledDeck)
     }
     return $result;
 }
+
 
 
 // ----------- USAGE -----------------
