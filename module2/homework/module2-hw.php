@@ -94,7 +94,6 @@ function deal($players, $numCards, &$shuffledDeck)
 }
 
 
-
 // ----------- USAGE -----------------
 
 // Crack open a brand new deck of cards

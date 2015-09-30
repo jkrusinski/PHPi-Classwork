@@ -1,31 +1,36 @@
 <html>
 <head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script>
 
+        $(document).ready(function(){
+
+
+            $('#btn-fetch-data').on('click', function() {
+
+                $.ajax({
+                    url: "server_data.php",
+                    dataType: "json",
+                    success: function(data) {
+                        var name = data.name;
+                        var date = data.date;
+
+                        $('#div-data').append(name + ' ' + date + '<br />');
+
+                    }
+                });
+
+            });
+
+        });
+
+    </script>
 </head>
 <body>
 
-<?php
-$favoritePet = isset($_POST['favoritePet']) ? $_POST['favoritePet'] : null;
-?>
+<input type="button" value="Fetch Data" id="btn-fetch-data" />
 
-<form name="collectDataForm" action="ajax_example.php" method="post">
-
-    <input type="text" name="favoritePet" size="20" value="<?php echo $favoritePet; ?>" />
-    <input type="submit" value="Do work!" />
-
-</form>
-
-<?php
-
-$classMates = ['alex', 'jerry', 'simon', 'samir', 'brian', 'traci', 'jared'];
-
-$len = count($classMates) - 1;
-
-$ranNum = rand(0, $len);
-
-echo "<p>$classMates[$ranNum] $favoritePet</p>";
-
-?>
+<div id="div-data"></div>
 
 </body>
 </html>
