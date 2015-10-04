@@ -123,18 +123,22 @@ class Card
         switch ($this->suit) {
 
             case 'spades':
+                //add suit entity to card
                 $this->htmlEntity = $this->allowedEntities['spades'];
                 break;
 
             case 'clubs':
+                //add suit entity to card
                 $this->htmlEntity = $this->allowedEntities['clubs'];
                 break;
 
             case 'hearts':
+                //add suit entity to card
                 $this->htmlEntity = $this->allowedEntities['hearts'];
                 break;
 
             case 'diamonds':
+                //add suit entity to card
                 $this->htmlEntity = $this->allowedEntities['diamonds'];
                 break;
 
