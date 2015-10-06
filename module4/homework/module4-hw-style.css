@@ -1,0 +1,39 @@
+.card {
+    position: relative;
+    width: 8em;
+    height: 11.5em;
+    border: solid black 1px;
+    display: inline-block;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    width: 100%;
+    font-size: 3em;
+}
+
+.red {
+    color: red;
+}
+
+.bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+.bottom-right,
+.top-left {
+    margin: 7px 10px;
+    font-size: 1.3em;
+}
