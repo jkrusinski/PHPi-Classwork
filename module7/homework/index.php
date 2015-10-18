@@ -10,12 +10,11 @@ try {
     }
     $query = new NetflixSearch();
 
-//    $query->setDirector('Quentin Tarantino');
-    $query->setTitle('scream 2');
-
+    $query->setDirector('Quentin Tarantino');
+    $query->setTitle('Kill Bill: Vol. 2');
 
     echo '<pre>';
-    $body = $query->apiRequest();
+    $body = $query->searchNetflix();
     print_r($body);
 
 } catch (Exception $e) {
@@ -33,7 +32,7 @@ try {
 </head>
 <body>
 
-<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
 
     <label>Title: <input type="text" name="title"/></label><br/>
     <label>Actor: <input type="text" name="actor"></label><br/>

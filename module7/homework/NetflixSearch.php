@@ -4,35 +4,43 @@ class NetflixSearch
 {
     /**
      * Title search query
+     *
      * @var string
      */
     protected $title;
 
     /**
      * Director search query
+     *
      * @var string
      */
     protected $director;
 
     /**
      * Year search query
+     *
      * @var int
      */
     protected $year;
 
     /**
      * Actor search query
+     *
      * @var string
      */
     protected $actor;
 
     /**
+     * Setter for $title
+     * Type validates, prepares query as GET parameter
+     *
      * @param string $title
+     *
      * @return bool returns true on success, false on input error
      */
     public function setTitle($title)
     {
-        if(!is_string($title)) return false;
+        if (!is_string($title)) return false;
 
         //encode for URL
         $title = urlencode($title);
@@ -46,12 +54,16 @@ class NetflixSearch
     }
 
     /**
+     * Setter for $director
+     * Type validates, prepares query as GET parameter
+     *
      * @param string $director
+     *
      * @return bool returns true on success, false on input error
      */
     public function setDirector($director)
     {
-        if(!is_string($director)) return false;
+        if (!is_string($director)) return false;
 
         //encode for URL
         $director = urlencode($director);
@@ -65,12 +77,17 @@ class NetflixSearch
     }
 
     /**
+     * Setter for $year
+     * Type validates, prepares query as GET parameter
+     *
      * @param int $year
+     *
      * @return bool returns true on success, false on input error
      */
     public function setYear($year)
     {
-        if(!is_int($year) && !in_array($year, range(1900, 2100))) return false;
+        //If is not INT or is not between years 1900 - 2100
+        if (!is_int($year) || !in_array($year, range(1900, 2100))) return false;
 
         //put it in GET variable format
         $year = 'year=' . $year;
@@ -80,12 +97,16 @@ class NetflixSearch
     }
 
     /**
+     * Setter for $actor
+     * Type validates, prepares query as GET parameter
+     *
      * @param string $actor
+     *
      * @return bool returns true on success, false on input error
      */
     public function setActor($actor)
     {
-        if(!is_string($actor)) return false;
+        if (!is_string($actor)) return false;
 
         //encode for URL
         $actor = urlencode($actor);
@@ -100,21 +121,22 @@ class NetflixSearch
 
     /**
      * Sends a request to the Netflix Roulette API using provided query
+     *
+     * @throws Exception if HTTP Request is unsuccessful
+     *
      * @return array Contains API body with Netflix Search Results
-     * @throws Exception
      */
-    public function apiRequest()
+    protected function apiRequest()
     {
         //initialize $query
         $query = [];
 
-        //add search queries to $query
-        if(isset($this->title)) $query[] = $this->title;
-        if(isset($this->actor)) $query[] = $this->actor;
-        if(isset($this->year)) $query[] = $this->year;
         if(isset($this->director)) $query[] = $this->director;
+        if(isset($this->actor)) $query[] = $this->actor;
+        if(isset($this->title)) $query[] = $this->title;
+        if(isset($this->year)) $query[] = $this->year;
 
-        var_dump($query);
+
         //implode $query into a string
         $query = implode('&', $query);
 
@@ -128,7 +150,7 @@ class NetflixSearch
         $code = strval($code);  //needed to select first character
         $reason = $response->getReasonPhrase();
 
-        if ($code[0] != '2' ) {
+        if ($code[0] != '2') {
             throw new Exception('Request Failed<br/><br/>Code: ' . $code . '<br/>Reason: ' . $reason);
         }
 
@@ -136,5 +158,14 @@ class NetflixSearch
         $body = $response->getBody();
         return json_decode($body);
 
+    }
+
+    public function searchNetflix()
+    {
+        /*
+         * Put HTML rendering here
+         */
+
+        return $this->apiRequest();
     }
 }
